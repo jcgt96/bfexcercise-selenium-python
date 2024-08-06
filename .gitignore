@@ -1,0 +1,30 @@
+# Virtual environment
+venv/
+*.pyc
+__pycache__/
+
+# Configuration and dependency files
+*.log
+*.csv
+*.sqlite3
+*.db
+.DS_Store
+
+# System files
+Thumbs.db
+
+# Report and result files
+reports/
+*.html
+*.xml
+
+# Behave feature files
+features/reports/
+features/screenshots/
+
+# Selenium WebDriver configuration
+webdriver/
+
+# IDE configuration files
+.idea/
+.vscode/
