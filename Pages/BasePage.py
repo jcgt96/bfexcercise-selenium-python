@@ -1,10 +1,11 @@
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.remote.webdriver import WebDriver
 
 
 class BasePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver):
         self.driver = driver
 
     def do_click(self, by_locator):
@@ -27,3 +28,6 @@ class BasePage:
         dropdown_element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
         dropdown = Select(dropdown_element)
         dropdown.select_by_visible_text(option)
+
+    def find_element(self, by, value):
+        return self.driver.find_element(by, value)
