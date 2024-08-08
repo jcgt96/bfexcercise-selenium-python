@@ -29,5 +29,12 @@ class BasePage:
         dropdown = Select(dropdown_element)
         dropdown.select_by_visible_text(option)
 
+    def select_option_from_menu(self, by_locator, option):
+        menu_options = WebDriverWait(self.driver, 10).until(EC.visibility_of_all_elements_located(by_locator))
+        for element in menu_options:
+            if element.text == option:
+                element.click()
+        
+
     def find_element(self, by, value):
         return self.driver.find_element(by, value)
