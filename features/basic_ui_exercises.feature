@@ -22,3 +22,10 @@ Feature: Practicing Basic User Interactions
   Scenario: Selecting an Option from a Dropdown Menu
     When she selects "Option3" from the dropdown
     Then she should see that "Option3" is selected in the dropdown menu
+
+  #@skip
+  Scenario: Verifying Multiple Checkbox Selections
+    When she selects "Option1" in the checkbox
+    And she selects "Option3" in the checkbox
+    Then she should see that the "Option1" checkbox is checked
+    And she should see that the "Option3" checkbox also is checked

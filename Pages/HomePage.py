@@ -25,3 +25,15 @@ class HomePage(BasePage):
     
     def select_option_from_option_dropdown(self,dropdown_option):
         self.select_an_option_from_dropdown(HPL.option_dropdown, dropdown_option)
+
+    def select_checkbox_option1(self):
+        self.do_click(HPL.checkbox_1)
+
+    def select_checkbox_option3(self):
+        self.do_click(HPL.checkbox_3)
+
+    def checkbox_option1_is_selected(self):
+        return self.find_element(*HPL.checkbox_1).is_selected()
+    
+    def checkbox_option3_is_selected(self):
+        return self.find_element(*HPL.checkbox_3).is_selected()

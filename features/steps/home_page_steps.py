@@ -37,3 +37,21 @@ def step_select_third_option_from_the_dropdown(context):
 @then('she should see that "Option3" is selected in the dropdown menu')
 def step_then_should_see_the_option3_is_in_the_dropdown_field(context):
     context.home_page.take_actual_value() == "Option3"
+
+#Fourth Scenario
+    
+@when('she selects "Option1" in the checkbox')
+def step_selects_option1_in_the_checkbox(context):
+    context.home_page.select_checkbox_option1()
+
+@when('she selects "Option3" in the checkbox')
+def step_selects_option1_in_the_checkbox(context):
+    context.home_page.select_checkbox_option3()
+
+@then('she should see that the "Option1" checkbox is checked')
+def step_then_should_see_the_checkbox1_is_selected(context):
+    assert context.home_page.checkbox_option1_is_selected()
+
+@then('she should see that the "Option3" checkbox also is checked')
+def step_then_should_see_the_checkbox1_is_selected(context):
+    assert context.home_page.checkbox_option3_is_selected()
