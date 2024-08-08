@@ -14,12 +14,12 @@ python3 -m venv venv
 ```
 Once created, the following step is to rise the enviroment.
 
-Windosws:
+Windows:
 ```
 venv\Scripts\activate
 ```
 
-MacOs and Linux:
+MacOS and Linux:
 
 ```
 source venv/bin/activate
