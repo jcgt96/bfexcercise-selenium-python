@@ -9,7 +9,7 @@ def step_given_user_on_home_page(context):
     context.driver.get(LPD.BASE_URL)
     context.home_page = HomePage(context.driver)
 
-@when('she select the "Radio2" option in the radio button')
+@when('she selects the "Radio2" option in the radio button')
 def step_selects_second_option_radio_button(context):
     context.home_page.select_second_radio_button()
 

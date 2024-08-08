@@ -10,5 +10,5 @@ Feature: Practicing Basic User Interactions
 
   #@skip
   Scenario: Selecting an Option in a Radio Button
-    When she select the "Radio2" option in the radio button
+    When she selects the "Radio2" option in the radio button
     Then she should see that the "Radio2" option is selected
