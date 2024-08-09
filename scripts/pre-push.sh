@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Run pre-commit checks
-poetry run pre-commit
+poetry run pre-commit run --all-files
 if [ $? -ne 0 ]; then
     echo "Pre-commit checks failed. Push aborted."
     exit 1

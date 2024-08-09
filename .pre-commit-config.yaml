@@ -16,8 +16,7 @@ repos:
         hooks:
             -   id: gherkin-lint
                 name: Gherkin Lint
-                entry: gherkin-lint
-                args: ["-c .gherkin-lintrc.json"]
+                entry: gherkin-lint -c .gherkin-lintrc.json
                 language: node
                 types: [ text ]
-                files: \*.feature$
+                files: \.feature$
