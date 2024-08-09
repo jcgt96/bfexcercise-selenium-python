@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bfexcercise-selenium-python"
+version = "0.1.0"
+description = ""
+authors = ["Juan Camilo Gomez"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+behave = "^1.2.6"
+selenium = "^4.23.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+pylint = "^3.2.6"
+pysonar-scanner = "^0.1.0.340"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
