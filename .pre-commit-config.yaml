@@ -1,0 +1,23 @@
+repos:
+    -   repo: https://github.com/psf/black
+        rev: 24.8.0  # Use the latest version of pylint available
+        hooks:
+            -   id: black
+                entry: poetry run black
+
+    -   repo: https://github.com/pre-commit/mirrors-pylint
+        rev: v3.0.0a5  # Use the latest version of pylint available
+        hooks:
+            -   id: pylint
+                entry: poetry run pylint
+                args: [ "--rcfile=.pylintrc" ]
+
+    -   repo: local
+        hooks:
+            -   id: gherkin-lint
+                name: Gherkin Lint
+                entry: gherkin-lint
+                args: ["-c .gherkin-lintrc.json"]
+                language: node
+                types: [ text ]
+                files: \*.feature$

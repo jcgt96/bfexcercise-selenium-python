@@ -49,6 +49,11 @@ To run the test, you need to run the following command:
 ```bash
 poetry run behave
 ```
+
+To run the browser in headless mode:
+```bash
+export HEADLESS=True
+poetry run behave
 ```
 
 ### Development
