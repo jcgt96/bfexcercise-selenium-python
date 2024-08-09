@@ -51,6 +51,7 @@ poetry run behave
 ```
 
 To run the browser in headless mode:
+
 ```bash
 export HEADLESS=True
 poetry run behave

@@ -1,5 +1,5 @@
 {
-  "devDependencies": {
-    "gherkin-lint": "^4.2.2"
-  }
+    "devDependencies": {
+        "gherkin-lint": "^4.2.2"
+    }
 }

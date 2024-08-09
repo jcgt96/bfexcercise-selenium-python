@@ -1,7 +1,8 @@
 import os
+
+from behave import fixture, use_fixture
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from behave import fixture, use_fixture
 
 
 @fixture
