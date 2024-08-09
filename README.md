@@ -1,48 +1,62 @@
+# Python + Behave + Selenium Project
 
-# Selenium with python
+Based on the Gherkin language, here is a framework using Behave that is the
+equivalent of Serenity BDD in Python. Here is used the POM (Page Object Model
+Pattern).
 
-Based on the Gherklin lenguaje, here is a framework using Behave that is the equivalent of Serenity BDD in Python. Here is used the POM (Page Object Model Pattern).
+---
 
-# Installing Dependences
+## ✏️ How to Contribute
 
-Its recommended to work under a virtual enviroment. For that, the first is to create one.
+We welcome contributions! Please
+see [docs/CONTRIBUTE-python.md](docs/CONTRIBUTE-python.md) for guidelines on how
+to contribute to this project.
 
-Creating a virtual enviroment: 
+---
 
-```
-python3 -m venv venv
-```
-Once created, the following step is to rise the enviroment.
+## 🧰 Tech Stack
 
-Windows:
-```
-venv\Scripts\activate
-```
+- **Python 3**: The programming language used for this project.
+- **[Poetry](https://python-poetry.org)**: Dependency manager for Python
+  projects.
+- Behave.
 
-MacOS and Linux:
+---
 
-```
-source venv/bin/activate
-```
+## ℹ️ Instructions
 
-You will know that the env is already risen when in your terminal starts with (venv).
+### Installation
 
-Now, in your virtual enviroment you need to install the dependences that are required to run this project. For that, run the following command:
-
-```
-pip install -r requirements.txt
-```
-
-verify the installation:
+To install the project, run the following command:
 
 ```
-pip list
+sh scripts/install.sh
 ```
 
-Now you are set to work and run! 
+If your environment isn't set up yet, please refer
+to [docs/INSTALLATION.md](docs/INSTALLATION.md) for detailed instructions.
 
-To run all the scernarios described in the .feature file just run the following command:
+### Execution
 
+Before running the tests you need to start the environment:
+
+```bash
+poetry shell
 ```
-behave
+
+To run the test, you need to run the following command:
+
+```bash
+poetry run behave
 ```
+```
+
+### Development
+
+For development instructions and contribution guidelines, please
+see [docs/CONTRIBUTE-python.md](docs/CONTRIBUTE-python.md).
+
+---
+
+By following these guidelines, you should be able to get up and running with the
+project quickly and easily. Happy coding!
