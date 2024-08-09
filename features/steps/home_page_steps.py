@@ -6,8 +6,8 @@ from Config.Config import LoginPageData as LPD
 
 @given('Verena is on the home page')
 def step_given_user_on_home_page(context):
-    context.driver.get(LPD.BASE_URL)
-    context.home_page = HomePage(context.driver)
+    context.browser.get(LPD.BASE_URL)
+    context.home_page = HomePage(context.browser)
 
 @when('she selects the "Radio2" option in the radio button')
 def step_selects_second_option_radio_button(context):
