@@ -28,30 +28,30 @@ def step_then_second_radio_button_is_selected(context):
 # Second Scenario
 
 
-@when('she selects "United States (USA)" from the country menu')
-def step_selects_usa__from_the_menu(context):
-    context.home_page.type_in_the_country_menu("United States (USA)")
-    context.home_page.select_country_from_menu("United States (USA)")
+@when('she selects "{country_name}" from the country menu')
+def step_selects_country_from_the_menu(context, country_name):
+    context.home_page.type_in_the_country_menu(country_name)
+    context.home_page.select_country_from_menu(country_name)
 
 
-@then(
-    'she should see that the country text field value is set to "United States (USA)"'
-)
-def step_then_she_should_see_that_the_country_text_field_value_is_USA(context):
-    assert context.home_page.take_actual_value() == "United States (USA)"
+@then('she should see that the country text field value is set to "{country_name}"')
+def step_then_she_should_see_that_the_country_text_field_value_is(
+    context, country_name
+):
+    assert context.home_page.take_actual_value() == country_name
 
 
 # Third Scenario
 
 
-@when('she selects "Option3" from the dropdown')
-def step_select_third_option_from_the_dropdown(context):
-    context.home_page.select_option_from_option_dropdown("Option3")
+@when('she selects "{dropbox_option}" from the dropdown')
+def step_select_third_option_from_the_dropdown(context, dropbox_option):
+    context.home_page.select_option_from_option_dropdown(dropbox_option)
 
 
-@then('she should see that "Option3" is selected in the dropdown menu')
-def step_then_should_see_the_option3_is_in_the_dropdown_field(context):
-    assert context.home_page.take_actual_value_from_dropdown() == "Option3"
+@then('she should see that "{dropbox_option}" is selected in the dropdown menu')
+def step_then_should_see_the_option_is_in_the_dropdown_field(context, dropbox_option):
+    assert context.home_page.take_actual_value_from_dropdown() == dropbox_option
 
 
 # Fourth Scenario
