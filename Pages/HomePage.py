@@ -25,6 +25,9 @@ class HomePage(BasePage):
     def select_option_from_option_dropdown(self, dropdown_option):
         self.select_an_option_from_dropdown(HPL.option_dropdown, dropdown_option)
 
+    def take_actual_value_from_dropdown(self):
+        return self.get_selected_dropdown_option(HPL.option_dropdown)
+
     def select_checkbox_option1(self):
         self.do_click(HPL.checkbox_1)
 

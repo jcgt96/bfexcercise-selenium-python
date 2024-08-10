@@ -51,7 +51,7 @@ def step_select_third_option_from_the_dropdown(context):
 
 @then('she should see that "Option3" is selected in the dropdown menu')
 def step_then_should_see_the_option3_is_in_the_dropdown_field(context):
-    context.home_page.take_actual_value() == "Option3"
+    assert context.home_page.take_actual_value_from_dropdown() == "Option3"
 
 
 # Fourth Scenario
