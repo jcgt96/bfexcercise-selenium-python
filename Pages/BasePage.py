@@ -25,6 +25,11 @@ class BasePage:
         select = Select(element)
         return select.first_selected_option.text
 
+    def get_element_value(self, by_locator):
+        element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(by_locator)
+        )
+        return element.get_attribute("value")
 
     def get_amount_dropdown_elements(self, by_locator):
         dropdown_element = WebDriverWait(self.driver, 10).until(

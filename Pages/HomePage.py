@@ -19,8 +19,7 @@ class HomePage(BasePage):
         self.select_option_from_menu(HPL.country_menu, country)
 
     def take_actual_value(self):
-        country_field = self.find_element(*HPL.country_menu)
-        return country_field.get_attribute("value")
+        return self.get_element_value(HPL.country_menu)
 
     def select_option_from_option_dropdown(self, dropdown_option):
         self.select_an_option_from_dropdown(HPL.option_dropdown, dropdown_option)
