@@ -63,7 +63,7 @@ def step_selects_option1_in_the_checkbox(context):
 
 
 @when('she selects "Option3" in the checkbox')
-def step_selects_option1_in_the_checkbox(context):
+def step_selects_option3_in_the_checkbox(context):
     context.home_page.select_checkbox_option3()
 
 
@@ -73,5 +73,5 @@ def step_then_should_see_the_checkbox1_is_selected(context):
 
 
 @then('she should see that the "Option3" checkbox also is checked')
-def step_then_should_see_the_checkbox1_is_selected(context):
+def step_then_should_see_the_checkbox3_is_selected(context):
     assert context.home_page.checkbox_option3_is_selected()
