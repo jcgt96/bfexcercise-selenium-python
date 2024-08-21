@@ -1,2 +1,1 @@
-class LoginPageData:
-    BASE_URL = "https://rahulshettyacademy.com/AutomationPractice/"
+BASE_URL: str = "https://rahulshettyacademy.com/AutomationPractice/"
