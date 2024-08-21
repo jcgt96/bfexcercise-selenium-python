@@ -39,7 +39,7 @@ jobs:
                 run: poetry install
 
             -   name: Run linters
-                run: poetry run pre-commit run
+                run: poetry run pre-commit run --all-files
                 continue-on-error: false
 
             -   name: Run tests
