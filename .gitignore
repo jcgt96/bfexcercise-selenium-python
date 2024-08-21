@@ -61,6 +61,7 @@ nosetests.xml​⬤
 # Ignore everything in the folder .idea except .idea/externalDependencies.xml
 **/.idea/*
 !**/.idea/externalDependencies.xml
+!**/.idea/poetry.xml
 *.iml
 *.iws
 *.ipr
