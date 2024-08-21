@@ -1,7 +1,6 @@
 from behave import given, when, then
 
-from Config.Config import LoginPageData as LPD
-from Pages.HomePage import HomePage
+from pages.home_page import HomePage
 
 
 @given("Verena is on the home page")
