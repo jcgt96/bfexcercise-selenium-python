@@ -15,7 +15,7 @@ def chrome_headless_browser(context):
 
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")  # Optional: disable GPU hardware acceleration
+    options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
     context.browser = webdriver.Chrome(options=options)
     yield context.browser
 

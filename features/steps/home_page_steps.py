@@ -1,12 +1,12 @@
 from behave import given, when, then
 
-from Config.Config import LoginPageData as LPD
-from Pages.HomePage import HomePage
+from config.config import BASE_URL
+from pages.home_page import HomePage
 
 
 @given("Verena is on the home page")
 def step_given_user_on_home_page(context):
-    context.browser.get(LPD.BASE_URL)
+    context.browser.get(BASE_URL)
     context.home_page = HomePage(context.browser)
 
 

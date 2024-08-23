@@ -1,3 +1,4 @@
 {
-    "pylint.lintOnChange": true
+    "pylint.lintOnChange": true,
+    "python.defaultInterpreterPath": "$USER_HOME$/Library/Caches/pypoetry/virtualenvs/bfexcercise-selenium-python-keRD3Tgd-py3.12/bin/python",
 }
