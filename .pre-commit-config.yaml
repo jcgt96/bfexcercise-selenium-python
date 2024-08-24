@@ -4,7 +4,8 @@ repos:
         rev: 24.8.0  # Use the latest version of pylint available
         hooks:
             -   id: black
-                entry: poetry run black
+                entry: poetry run black .
+                always_run: true
                 stages: [commit, push]
 
     -   repo: https://github.com/pre-commit/mirrors-pylint
@@ -16,7 +17,8 @@ repos:
                 stages: [commit]
             -   id: pylint
                 entry: poetry run pylint
-                args: [ "--rcfile=.pylintrc", "--all-files" ]
+                args: [ "--rcfile=.pylintrc", "src" ]
+                always_run: true
                 stages: [ push ]
 
     -   repo: local
@@ -27,6 +29,7 @@ repos:
                 language: node
                 types: [ text ]
                 files: \.feature$
+                always_run: true
                 stages: [commit, push]
             -   id: tests
                 name: tests
@@ -34,5 +37,5 @@ repos:
                 language: system
                 types: [ python ]
                 pass_filenames: false
-                stages: [push]
                 always_run: true
+                stages: [push]
