@@ -28,3 +28,10 @@ repos:
                 types: [ text ]
                 files: \.feature$
                 stages: [commit, push]
+            -   id: tests
+                name: tests
+                entry: env HEADLESS=true poetry run behave src/main/features
+                language: system
+                types: [ python ]
+                pass_filenames: false
+                stages: [push]
