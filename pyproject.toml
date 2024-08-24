@@ -4,20 +4,21 @@ version = "0.1.0"
 description = ""
 authors = ["Juan Camilo Gomez"]
 readme = "README.md"
-package-mode = false
+packages = [
+    { include = "main", from = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 behave = "^1.2.6"
 selenium = "^4.23.1"
-pre-commit = "^3.8.0"
-
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
 pylint = "^3.2.6"
-pysonar-scanner = "^0.1.0.340"
 pylint-behave = "^1.0.3"
+pysonar-scanner = "^0.1.0.340"
+pre-commit = "^3.8.0"
 
 [build-system]
 requires = ["poetry-core"]

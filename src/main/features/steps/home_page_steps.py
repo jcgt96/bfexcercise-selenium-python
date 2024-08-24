@@ -1,7 +1,7 @@
 from behave import given, when, then
 
-from config.config import BASE_URL
-from pages.home_page import HomePage
+from src.main.config.config import BASE_URL
+from src.main.pages.home_page import HomePage
 
 
 @given("Verena is on the home page")
