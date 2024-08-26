@@ -23,3 +23,10 @@ pre-commit = "^3.8.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+post-install = "scripts.helper:post_install"
+sonar = "scripts.helper:sonar"
+lint = "scripts.helper:lint"
+test = "scripts.helper:test" #Alias for poetry run behave
+test-ci = "scripts.helper:test_ci"

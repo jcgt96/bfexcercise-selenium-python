@@ -33,7 +33,7 @@ repos:
                 stages: [commit, push]
             -   id: tests
                 name: tests
-                entry: env HEADLESS=true poetry run behave src/main/features
+                entry: poetry run test-ci src/main/features
                 language: system
                 types: [ python ]
                 pass_filenames: false

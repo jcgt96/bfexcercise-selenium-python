@@ -82,7 +82,7 @@ Keeping code clean and readable is essential. Remember:
 To run the linter, execute the following command:
 
 ```bash
-poetry run pre-commit
+poetry run lint
 ```
 
 ### Run Static Code Analysis
@@ -91,7 +91,7 @@ Running static code analysis helps detect potential bugs and code smells. Use
 the following command to run the analysis:
 
 ```bash
-poetry run pysonar-scanner
+poetry run sonar
 ```
 
 The report will be available at [http://localhost:9000](http://localhost:9000).
