@@ -1,4 +1,4 @@
-from resources.locators import (
+from src.main.resources.locators import (
     SECOND_RADIO_BUTTON,
     COUNTRY_MENU,
     OPTION_DROPDOWN,
