@@ -27,10 +27,12 @@ to contribute to this project.
 
 ### Installation
 
-To install the project, run the following command:
+To install the project, run the following commands:
 
-```
-sh scripts/install.sh
+```bash
+poetry shell
+poetry install
+poetry run post-install
 ```
 
 If your environment isn't set up yet, please refer
@@ -47,14 +49,13 @@ poetry shell
 To run the test, you need to run the following command:
 
 ```bash
-poetry run behave
+poetry run test
 ```
 
 To run the browser in headless mode:
 
 ```bash
-export HEADLESS=True
-poetry run behave
+poetry run test-ci
 ```
 
 ### Development

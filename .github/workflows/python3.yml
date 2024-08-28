@@ -22,9 +22,6 @@ jobs:
                     node-version: '18'
                     cache: 'npm'
 
-            -   name: Install gherkin-lint
-                run: npm install
-
             -   name: Install poetry
                 run: pipx install poetry
 
@@ -38,12 +35,15 @@ jobs:
             -   name: Install dependencies
                 run: poetry install
 
+            -   name: Run post install actions
+                run: poetry run post-install
+
             -   name: Run linters
-                run: poetry run pre-commit run --all-files
+                run: poetry run lint
                 continue-on-error: false
 
             -   name: Run tests
-                run: poetry run behave
+                run: poetry run test-ci
                 env:
                     HEADLESS: "True"
                 if: success()

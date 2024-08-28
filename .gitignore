@@ -65,6 +65,7 @@ nosetests.xml​⬤
 *.iml
 *.iws
 *.ipr
+*.swp
 
 # SonarQube
 .scannerwork/

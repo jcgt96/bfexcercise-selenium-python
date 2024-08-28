@@ -1,9 +1,12 @@
+default_install_hook_types: [pre-commit, pre-push, commit-msg]
 repos:
     -   repo: https://github.com/psf/black
         rev: 24.8.0  # Use the latest version of pylint available
         hooks:
             -   id: black
-                entry: poetry run black
+                entry: poetry run black .
+                always_run: true
+                stages: [commit, push]
 
     -   repo: https://github.com/pre-commit/mirrors-pylint
         rev: v3.0.0a5  # Use the latest version of pylint available
@@ -11,6 +14,12 @@ repos:
             -   id: pylint
                 entry: poetry run pylint
                 args: [ "--rcfile=.pylintrc" ]
+                stages: [commit]
+            -   id: pylint
+                entry: poetry run pylint
+                args: [ "--rcfile=.pylintrc", "src" ]
+                always_run: true
+                stages: [ push ]
 
     -   repo: local
         hooks:
@@ -20,3 +29,13 @@ repos:
                 language: node
                 types: [ text ]
                 files: \.feature$
+                always_run: true
+                stages: [commit, push]
+            -   id: tests
+                name: tests
+                entry: poetry run test-ci src/main/features
+                language: system
+                types: [ python ]
+                pass_filenames: false
+                always_run: true
+                stages: [push]
