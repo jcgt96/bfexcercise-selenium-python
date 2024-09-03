@@ -74,4 +74,6 @@ nosetests.xml​⬤
 # NodeJS
 node_modules/
 
+# Python
 venv/
+.run/

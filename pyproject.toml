@@ -31,3 +31,4 @@ sonar = "scripts.helper:sonar"
 lint = "scripts.helper:lint"
 test = "scripts.helper:test" #Alias for poetry run behave
 test-ci = "scripts.helper:test_ci"
+report = "scripts.helper:report"
