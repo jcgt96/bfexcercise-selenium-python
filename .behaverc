@@ -1,2 +1,9 @@
 [behave]
 paths = src/main/features
+format=allure_behave.formatter:AllureFormatter
+outfiles=./.run/reports/behave
+
+[behave.userdata]
+AllureFormatter.link_pattern = {}
+AllureFormatter.issue_pattern = https://github.com/allure-framework/allure-python/issues/{}
+AllureFormatter.hide_excluded = true

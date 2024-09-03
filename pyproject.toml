@@ -20,6 +20,7 @@ pylint-behave = "^1.0.3"
 pysonar-scanner = "^0.1.0.340"
 pre-commit = "^3.8.0"
 
+allure-behave = "^2.13.5"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -30,3 +31,4 @@ sonar = "scripts.helper:sonar"
 lint = "scripts.helper:lint"
 test = "scripts.helper:test" #Alias for poetry run behave
 test-ci = "scripts.helper:test_ci"
+report = "scripts.helper:report"

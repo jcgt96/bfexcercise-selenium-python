@@ -2,11 +2,8 @@ name: Python3
 
 on:
     push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
+        branches: [ "dev", "stage", "master", "main" ]
+    pull_request: # Trigger on pull requests to any branch
 
 jobs:
     build:
@@ -24,13 +21,26 @@ jobs:
 
             -   name: Install poetry
                 run: pipx install poetry
-
+                
             -   name: Set up Python
                 uses: actions/setup-python@v5
                 with:
-                    python-version: '3.x'
+                    python-version: '3.12'
                     cache: poetry
                     cache-dependency-path: poetry.lock
+
+            -   name: Cache stuff
+                # The cache is only refreshed when the lock file changes,
+                # leading to better cache reuse.
+                uses: actions/cache@v4
+                id: cache-primes
+                with:
+                    path: |
+                        .run/reports
+                    key: custom-cache-${{ runner.os }}-${{ hashFiles('package-lock.json', 'poetry.lock') }}
+                    restore-keys: |
+                        custom-cache-${{ runner.os }}-
+                    save-always: true
 
             -   name: Install dependencies
                 run: poetry install
@@ -47,6 +57,18 @@ jobs:
                 env:
                     HEADLESS: "True"
                 if: success()
+
+            -   name: Run reports
+                run: poetry run report
+                if: success()
+
+            # Upload Reports as Artifacts
+            -   name: Upload Reports
+                if: success()
+                uses: actions/upload-artifact@v4
+                with:
+                    name: reports
+                    path: .run/reports
 
             # Optional: Run SonarQube analysis if you have it configured
             # - name: Run SonarQube Scanner
