@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "allure-commandline": "^2.30.0",
         "gherkin-lint": "^4.2.2"
     }
 }
