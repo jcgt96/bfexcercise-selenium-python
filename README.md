@@ -20,6 +20,7 @@ to contribute to this project.
 - **[Poetry](https://python-poetry.org)**: Dependency manager for Python
   projects.
 - Behave.
+- Allure reports.
 
 ---
 
@@ -58,10 +59,30 @@ To run the browser in headless mode:
 poetry run test-ci
 ```
 
+### Reporting
+
+To run the report you need to run the following command after the tests:
+
+```bash
+poetry run report
+```
+
+The previous command gives you instructions on how to open the report.
+
 ### Development
 
 For development instructions and contribution guidelines, please
 see [docs/CONTRIBUTE-python.md](docs/CONTRIBUTE-python.md).
+
+## 🔧 Troubleshooting
+
+The following are the most common issues:
+
+- Most of the issues can be addressed following the **Installation**
+  instructions in this file.
+- In the IDE you need to set your **Python Interpreter** to **Poetry**.
+- If you, by error, create Virtual Environment for this project, delete the
+  folder and re-clone it.
 
 ---
 
