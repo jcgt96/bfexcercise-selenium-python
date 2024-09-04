@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from src.main.resources.locators import (
     SECOND_RADIO_BUTTON,
     COUNTRY_MENU,
@@ -10,8 +11,9 @@ from .base_page import BasePage
 
 class HomePage(BasePage):
 
-    def select_second_radio_button(self):
-        self.do_click(SECOND_RADIO_BUTTON)
+    def select_radio_button(self, radio_button_value):
+        radio_button_lc = (By.XPATH, f'//input[@value="{radio_button_value}"]')
+        self.do_click(radio_button_lc)
 
     def second_radio_button_is_selected(self):
         return self.find_element(*SECOND_RADIO_BUTTON).is_selected()

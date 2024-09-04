@@ -32,19 +32,19 @@ class BasePage:
         return element.get_attribute("value")
 
     def get_amount_dropdown_elements(self, by_locator):
-        dropdown_element = WebDriverWait(self.driver, 10).until(
-            expected_conditions.presence_of_element_located(by_locator)
-        )
-        dropdown = Select(dropdown_element)
+        dropdown = self.create_a_select_element_from_locator(by_locator)
         all_options = dropdown.options
         return len(all_options)
 
     def select_an_option_from_dropdown(self, by_locator, option):
-        dropdown_element = WebDriverWait(self.driver, 10).until(
-            expected_conditions.visibility_of_element_located(by_locator)
-        )
-        dropdown = Select(dropdown_element)
+        dropdown = self.create_a_select_element_from_locator(by_locator)
         dropdown.select_by_visible_text(option)
+
+    def create_a_select_element_from_locator(self, by_locator):
+        dropdown_element = WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located(by_locator)
+        )
+        return Select(dropdown_element)
 
     def select_option_from_menu(self, by_locator, option):
         menu_options = WebDriverWait(self.driver, 10).until(

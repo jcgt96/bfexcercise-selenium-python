@@ -13,12 +13,12 @@ def step_given_user_on_home_page(context):
 # First Scenario
 
 
-@when('she selects the "Radio2" option in the radio button')
-def step_selects_second_option_radio_button(context):
-    context.home_page.select_second_radio_button()
+@when('she selects the "{radio_option}" option in the radio button')
+def step_selects_second_option_radio_button(context, radio_option):
+    context.home_page.select_radio_button(radio_option)
 
 
-@then('she should see that the "Radio2" option is selected')
+@then('she should see that the "radio2" option is selected')
 def step_then_second_radio_button_is_selected(context):
     assert (
         context.home_page.second_radio_button_is_selected()
