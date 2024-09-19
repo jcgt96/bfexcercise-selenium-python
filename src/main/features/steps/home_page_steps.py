@@ -75,3 +75,68 @@ def step_then_should_see_the_checkbox1_is_selected(context):
 @then('she should see that the "Option3" checkbox also is checked')
 def step_then_should_see_the_checkbox3_is_selected(context):
     assert context.home_page.checkbox_option3_is_selected()
+
+
+# Fifth Scenario
+@when('she triggers an Alert Dialog with the name "{name}"')
+def step_when_she_triggers_an_alert_dialog_with_a_name(context, name):
+    context.home_page.trigger_customized_alert(name)
+
+
+@then('she should see an Alert Dialog with the text "{message}"')
+def step_check_message_in_alert(context, message):
+    assert context.home_page.get_tex_of_alert() == message
+    context.home_page.dismiss_alert_dialog()
+
+
+# Sixth Scenario
+@when('she triggers a Confirmation Dialog for the name "{name}"')
+def step_when_she_triggers_a_confirmation_dialog_with_a_name(context, name):
+    context.home_page.trigger_customized_confirmation(name)
+
+
+@then('she should see a Confirmation Dialog with the prompt "{prompt}"')
+def step_check_prompt_in_confirmation_dialog(context, prompt):
+    assert context.home_page.get_tex_of_alert() == prompt
+    context.home_page.dismiss_alert_dialog()
+
+
+# Seventh Scenario
+@when("she reads the third value listed in the price table")
+def step_read_third_value_in_price_col(context):
+    context.third_value = context.home_page.get_specific_cell_text(3, 2)
+
+
+@then('she should see that the third price is "{price}"')
+def step_check_third_price(context, price):
+    assert context.third_value == price
+
+
+# Eigth Scenario
+@when('Verena can see that the "{text}" text box is visible')
+def step_can_see_visible_text(context, text):
+    context.home_page.write_in_text_box(text)
+    context.home_page.show_text_box()
+    assert context.home_page.get_text_box_text() in text
+    assert context.home_page.get_text_box_text() == text
+
+
+@when('she requests to hide the "HideShow Example" text box')
+def step_hide_text_box(context):
+    context.home_page.hide_text_box()
+
+
+@then("she should see the text box become hidden")
+def step_verify_text_box_is_hidden(context):
+    assert not context.home_page.get_text_box_element().is_displayed()
+
+
+# Ninth Scenario
+@when("she requests to show it again")
+def step_show_text_box(context):
+    context.home_page.show_text_box()
+
+
+@then("she should see the text box become visible again")
+def step_verify_text_box_is_visible(context):
+    assert context.home_page.get_text_box_element().is_displayed()
