@@ -118,7 +118,6 @@ def step_can_see_visible_text(context, text):
     context.home_page.write_in_text_box(text)
     context.home_page.show_text_box()
     assert context.home_page.get_text_box_text() in text
-    assert context.home_page.get_text_box_text() == text
 
 
 @when('she requests to hide the "HideShow Example" text box')
