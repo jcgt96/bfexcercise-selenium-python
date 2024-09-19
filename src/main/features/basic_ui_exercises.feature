@@ -32,13 +32,13 @@ Feature: Practicing Basic User Interactions
 
   #@skip
   Scenario: Displaying a Custom Alert with the Name
-    When she triggers an Alert Dialog with the name "ALEX"
-    Then she should see an Alert Dialog with the text "Hello ALEX, share this practice page and share your knowledge"
+    When she triggers an Alert Dialog with the name "JUANK"
+    Then she should see an Alert Dialog with the text "Hello JUANK, share this practice page and share your knowledge"
 
 
   Scenario: Displaying a Custom Confirm Dialog with a Custom Name
-    When she triggers a Confirmation Dialog for the name "ALEX"
-    Then she should see a Confirmation Dialog with the prompt "Hello ALEX, Are you sure you want to confirm?"
+    When she triggers a Confirmation Dialog for the name "JUANK"
+    Then she should see a Confirmation Dialog with the prompt "Hello JUANK, Are you sure you want to confirm?"
 
   Scenario: Checking the Value of the Third item in the Price Table
     When she reads the third value listed in the price table
