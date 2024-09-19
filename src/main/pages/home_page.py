@@ -5,6 +5,13 @@ from src.main.resources.locators import (
     OPTION_DROPDOWN,
     CHECKBOX_1,
     CHECKBOX_3,
+    NAME_INPUT,
+    ALERT_BUTTON,
+    CONFIRM_BUTTON,
+    TABLE,
+    TEXT_BOX_INPUT,
+    SHOW_BUTTON,
+    HIDE_BUTTON,
 )
 from .base_page import BasePage
 
@@ -44,3 +51,38 @@ class HomePage(BasePage):
 
     def checkbox_option3_is_selected(self):
         return self.find_element(*CHECKBOX_3).is_selected()
+
+    def trigger_customized_alert(self, name):
+        self.do_send_keys(NAME_INPUT, name)
+        self.do_click(ALERT_BUTTON)
+
+    def trigger_customized_confirmation(self, name):
+        self.do_send_keys(NAME_INPUT, name)
+        self.do_click(CONFIRM_BUTTON)
+
+    def get_tex_of_alert(self):
+        alert_text = self.get_alert_text()
+        return alert_text
+
+    def dismiss_alert_dialog(self):
+        self.dismiss_alert()
+
+    def write_in_text_box(self, text):
+        self.do_send_keys(TEXT_BOX_INPUT, text)
+
+    def show_text_box(self):
+        self.do_click(SHOW_BUTTON)
+
+    def hide_text_box(self):
+        self.do_click(HIDE_BUTTON)
+
+    def get_text_box_element(self):
+        text_box_element = self.find_element(*TEXT_BOX_INPUT)
+        return text_box_element
+
+    def get_text_box_text(self):
+        text_box_text = self.get_element_value(TEXT_BOX_INPUT)
+        return text_box_text
+
+    def get_specific_cell_text(self, row_index, col_index):
+        return self.get_cell_text(TABLE, row_index, col_index)

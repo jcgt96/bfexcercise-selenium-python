@@ -29,3 +29,28 @@ Feature: Practicing Basic User Interactions
         And she selects "Option3" in the checkbox
         Then she should see that the "Option1" checkbox is checked
         And she should see that the "Option3" checkbox also is checked
+
+  #@skip
+  Scenario: Displaying a Custom Alert with the Name
+    When she triggers an Alert Dialog with the name "JUANK"
+    Then she should see an Alert Dialog with the text "Hello JUANK, share this practice page and share your knowledge"
+
+
+  Scenario: Displaying a Custom Confirm Dialog with a Custom Name
+    When she triggers a Confirmation Dialog for the name "JUANK"
+    Then she should see a Confirmation Dialog with the prompt "Hello JUANK, Are you sure you want to confirm?"
+
+  Scenario: Checking the Value of the Third item in the Price Table
+    When she reads the third value listed in the price table
+    Then she should see that the third price is "30"
+
+  Scenario: Hiding a Visible Text Box
+    When Verena can see that the "HideShow Example" text box is visible
+    And she requests to hide the "HideShow Example" text box
+    Then she should see the text box become hidden
+
+  Scenario: Toggling Visibility of a Text Box
+    When Verena can see that the "HideShow Example" text box is visible
+    And she requests to hide the "HideShow Example" text box
+    And she requests to show it again
+    Then she should see the text box become visible again
