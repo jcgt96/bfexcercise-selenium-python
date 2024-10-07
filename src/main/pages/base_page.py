@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait, Select
@@ -10,9 +11,16 @@ class BasePage:
         self.driver = driver
 
     def do_click(self, by_locator):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 15).until(
             expected_conditions.visibility_of_element_located(by_locator)
         ).click()
+
+    def do_hover(self, by_locator):
+        element = WebDriverWait(self.driver, 10).until(
+            expected_conditions.visibility_of_element_located(by_locator)
+        )
+        action = ActionChains(self.driver)
+        action.move_to_element(element).perform()
 
     def do_send_keys(self, by_locator, text):
         WebDriverWait(self.driver, 10).until(
@@ -33,10 +41,13 @@ class BasePage:
         return element.get_attribute("value")
 
     def get_element_text(self, by_locator):
-        element = WebDriverWait(self.driver, 10).until(
+        element = WebDriverWait(self.driver, 15).until(
             expected_conditions.visibility_of_element_located(by_locator)
         )
         return element.text
+
+    def get_text_title(self):
+        return self.driver.title
 
     def get_amount_dropdown_elements(self, by_locator):
         dropdown = self.create_a_select_element_from_locator(by_locator)
@@ -63,6 +74,32 @@ class BasePage:
 
     def find_element(self, by, value):
         return self.driver.find_element(by, value)
+
+    def switch_to_iframe(self, by_locator):
+        frame_locator = self.find_element(*by_locator)
+        self.driver.switch_to.frame(frame_locator)
+
+    def return_from_iframe(self):
+        self.driver.switch_to.default_content()
+
+    def switch_to_new_window(self):
+        main_window = self.driver.current_window_handle
+        all_windows = self.driver.window_handles
+        for window in all_windows:
+            if window != main_window:
+                self.driver.switch_to.window(window)
+                break
+
+    def switch_to_tab(self, tab_index):
+        tabs = self.driver.window_handles
+        self.driver.switch_to.window(tabs[tab_index])
+
+    def close_window(self):
+        self.driver.close()
+
+    def return_to_main_window(self):
+        window = self.driver.window_handles
+        self.driver.switch_to.window(window[0])
 
     def get_alert_text(self):
         alert = self.driver.switch_to.alert

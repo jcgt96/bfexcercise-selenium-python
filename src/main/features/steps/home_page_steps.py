@@ -1,4 +1,4 @@
-from behave import given, when, then
+from behave import given, when, then, step
 
 from src.main.config.config import BASE_URL
 from src.main.pages.home_page import HomePage
@@ -139,3 +139,70 @@ def step_show_text_box(context):
 @then("she should see the text box become visible again")
 def step_verify_text_box_is_visible(context):
     assert context.home_page.get_text_box_element().is_displayed()
+
+
+# Advanced Exercises
+
+
+# First Exercise
+@when('she hover over the "Mouse Hover" button')
+def step_hover_the_hover_button(context):
+    context.home_page.hover_hover_button()
+
+
+@then("she should see the contextual menu")
+def step_contextual_menu_is_displayed(context):
+    assert context.home_page.contextual_menu_is_displayed()
+
+
+# Second Exercise
+@when('she navigates to the "Job Support" link inside the iframe')
+def step_navigates_iframe_job_support_page(context):
+    context.home_page.switch_home_iframe()
+    context.home_page.go_to_job_support_link()
+
+
+@then('she should see a page titled "{title_name}" within the iframe')
+def step_title_value_is_expected(context, title_name):
+    current_page_title = context.home_page.get_frame_page_title()
+    assert current_page_title == title_name
+    context.home_page.return_home_page_from_frame()
+
+
+# Third Exercise
+@when('she clicks on the "Open Window" button')
+def step_click_new_window_button(context):
+    context.home_page.clicks_open_window_button()
+
+
+@when('she clicks the "Blog" link in the new window')
+def step_clicks_blog_link_new_window(context):
+    context.home_page.switch_to_new_window()
+    context.home_page.clicks_blog_link()
+
+
+@then('she should see a page titled "{title}"')
+def step_title_window_is_expected(context, title):
+    assert context.home_page.get_new_window_title() == title
+
+
+@step("she should return to the main page after closing the new window")
+def step_close_and_return_to_main_page(context):
+    context.home_page.close_and_return_to_home_page()
+
+
+# Fourth Exercise
+@when('she clicks on the "New Tab" button')
+def step_click_new_tab_button(context):
+    context.home_page.click_new_tab_button()
+
+
+@when('she clicks the "Blog" link in the new tab')
+def step_click_blog_new_tab(context):
+    context.home_page.switch_to_home_new_tab()
+    context.home_page.clicks_blog_link()
+
+
+@step("she should returns to the main page after closing the new tab")
+def step_return_to_main_tab(context):
+    context.home_page.close_and_return_to_home_page()
