@@ -12,3 +12,18 @@ TABLE: tuple[str, str] = (By.XPATH, "//div[@class='left-align']//table[@id='prod
 TEXT_BOX_INPUT: tuple[str, str] = (By.XPATH, "//input[@id='displayed-text']")
 SHOW_BUTTON: tuple[str, str] = (By.XPATH, "//input[@id='show-textbox']")
 HIDE_BUTTON: tuple[str, str] = (By.XPATH, "//input[@id='hide-textbox']")
+HOVER_BUTTON: tuple[str, str] = (By.XPATH, "//button[@id='mousehover']")
+CONTEXTUAL_MENU: tuple[str, str] = (By.XPATH, "//a[normalize-space()='Top']")
+FRAME: tuple[str, str] = (By.XPATH, "//*[@id='courses-iframe']")
+JOB_SUPPORT_OPTION: tuple[str, str] = (By.LINK_TEXT, "Job Support")
+JOB_SUPPORT_TITLE_PAGE: tuple[str, str] = (
+    By.XPATH,
+    "//h1[normalize-space()='Job Support']",
+)
+OPEN_WINDOW_BUTTON: tuple[str, str] = (By.XPATH, "//button[@id='openwindow']")
+BLOG_LINK: tuple[str, str] = (By.XPATH, "//a[text()='Blog']")
+NEW_WINDOW_TITLE: tuple[str, str] = (
+    By.XPATH,
+    "//h1[@class='alignwide wp-block-heading']",
+)
+NEW_TAB_BUTTON: tuple[str, str] = (By.XPATH, "//a[@id='opentab']")

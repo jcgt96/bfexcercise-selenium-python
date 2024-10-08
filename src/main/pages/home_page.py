@@ -12,6 +12,15 @@ from src.main.resources.locators import (
     TEXT_BOX_INPUT,
     SHOW_BUTTON,
     HIDE_BUTTON,
+    HOVER_BUTTON,
+    CONTEXTUAL_MENU,
+    FRAME,
+    JOB_SUPPORT_OPTION,
+    JOB_SUPPORT_TITLE_PAGE,
+    OPEN_WINDOW_BUTTON,
+    BLOG_LINK,
+    NEW_WINDOW_TITLE,
+    NEW_TAB_BUTTON,
 )
 from .base_page import BasePage
 
@@ -86,3 +95,47 @@ class HomePage(BasePage):
 
     def get_specific_cell_text(self, row_index, col_index):
         return self.get_cell_text(TABLE, row_index, col_index)
+
+    def hover_hover_button(self):
+        self.do_hover(HOVER_BUTTON)
+
+    def contextual_menu_is_displayed(self):
+        return self.find_element(*CONTEXTUAL_MENU).is_displayed()
+
+    def switch_home_iframe(self):
+        self.switch_to_iframe(FRAME)
+
+    def go_to_job_support_link(self):
+        self.do_click(JOB_SUPPORT_OPTION)
+
+    def get_frame_page_title(self):
+        return self.get_element_text(JOB_SUPPORT_TITLE_PAGE)
+
+    def return_home_page_from_frame(self):
+        self.return_from_iframe()
+
+    def clicks_open_window_button(self):
+        self.do_click(OPEN_WINDOW_BUTTON)
+
+    def switch_to_home_new_window(self):
+        self.switch_to_new_window()
+
+    def switch_to_home_new_tab(self):
+        self.switch_to_tab(1)
+
+    def clicks_blog_link(self):
+        self.do_click(BLOG_LINK)
+
+    def get_new_window_title(self):
+        return self.get_element_text(NEW_WINDOW_TITLE)
+
+    def close_and_return_to_home_page(self):
+        self.close_window()
+        self.return_to_main_window()
+
+    def close_tab_and_return_to_home_page(self):
+        self.close_window()
+        self.switch_to_tab(0)
+
+    def click_new_tab_button(self):
+        self.do_click(NEW_TAB_BUTTON)
