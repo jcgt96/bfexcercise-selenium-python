@@ -12,7 +12,7 @@ class BasePage:
 
     def do_click(self, by_locator):
         WebDriverWait(self.driver, 15).until(
-            expected_conditions.visibility_of_element_located(by_locator)
+            expected_conditions.element_to_be_clickable(by_locator)
         ).click()
 
     def do_hover(self, by_locator):
@@ -82,17 +82,31 @@ class BasePage:
     def return_from_iframe(self):
         self.driver.switch_to.default_content()
 
-    def switch_to_new_window(self):
+    def wait_for_element_to_disappear(self, by_locator, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            expected_conditions.invisibility_of_element_located(by_locator)
+        )
+
+    def switch_to_new_window(self, by_locator):
         main_window = self.driver.current_window_handle
+
         all_windows = self.driver.window_handles
         for window in all_windows:
             if window != main_window:
                 self.driver.switch_to.window(window)
+                self.wait_for_element_to_disappear(by_locator)
                 break
 
-    def switch_to_tab(self, tab_index):
+    def switch_to_tab(self, tab_index, by_locator):
         tabs = self.driver.window_handles
+
         self.driver.switch_to.window(tabs[tab_index])
+        self.wait_for_element_to_disappear(by_locator)
+
+    def back_to_main_tab(self):
+        tabs = self.driver.window_handles
+
+        self.driver.switch_to.window(tabs[0])
 
     def close_window(self):
         self.driver.close()

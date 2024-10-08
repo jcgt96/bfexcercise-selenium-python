@@ -177,7 +177,7 @@ def step_click_new_window_button(context):
 
 @when('she clicks the "Blog" link in the new window')
 def step_clicks_blog_link_new_window(context):
-    context.home_page.switch_to_new_window()
+    context.home_page.switch_to_home_new_window()
     context.home_page.clicks_blog_link()
 
 
