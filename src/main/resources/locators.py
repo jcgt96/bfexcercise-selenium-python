@@ -21,7 +21,11 @@ JOB_SUPPORT_TITLE_PAGE: tuple[str, str] = (
     "//h1[normalize-space()='Job Support']",
 )
 OPEN_WINDOW_BUTTON: tuple[str, str] = (By.XPATH, "//button[@id='openwindow']")
-BLOG_LINK: tuple[str, str] = (By.XPATH, "//a[text()='Blog']")
+PRE_LOADER: tuple[str, str] = (By.XPATH, "/html/body/div[1]")
+BLOG_LINK: tuple[str, str] = (
+    By.XPATH,
+    "(//a[contains(text(), 'Blog')])[1]",
+)
 NEW_WINDOW_TITLE: tuple[str, str] = (
     By.XPATH,
     "//h1[@class='alignwide wp-block-heading']",

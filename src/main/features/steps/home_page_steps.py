@@ -177,7 +177,7 @@ def step_click_new_window_button(context):
 
 @when('she clicks the "Blog" link in the new window')
 def step_clicks_blog_link_new_window(context):
-    context.home_page.switch_to_new_window()
+    context.home_page.switch_to_home_new_window()
     context.home_page.clicks_blog_link()
 
 
@@ -188,7 +188,7 @@ def step_title_window_is_expected(context, title):
 
 @step("she should return to the main page after closing the new window")
 def step_close_and_return_to_main_page(context):
-    context.home_page.close_and_return_to_home_page()
+    context.home_page.close_window_and_return_to_home_page()
 
 
 # Fourth Exercise
@@ -205,4 +205,4 @@ def step_click_blog_new_tab(context):
 
 @step("she should returns to the main page after closing the new tab")
 def step_return_to_main_tab(context):
-    context.home_page.close_and_return_to_home_page()
+    context.home_page.close_window_and_return_to_home_page()

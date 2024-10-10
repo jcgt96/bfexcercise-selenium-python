@@ -3,6 +3,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.common.exceptions import TimeoutException
 
 
 class BasePage:
@@ -11,9 +12,17 @@ class BasePage:
         self.driver = driver
 
     def do_click(self, by_locator):
-        WebDriverWait(self.driver, 15).until(
-            expected_conditions.visibility_of_element_located(by_locator)
-        ).click()
+        try:
+            WebDriverWait(self.driver, 100).until(
+                expected_conditions.presence_of_element_located(by_locator)
+            )
+        except TimeoutException:
+            print("Timed out waiting for " + by_locator)
+
+        element = WebDriverWait(self.driver, 100).until(
+            expected_conditions.element_to_be_clickable(by_locator)
+        )
+        element.click()
 
     def do_hover(self, by_locator):
         element = WebDriverWait(self.driver, 10).until(
@@ -41,7 +50,7 @@ class BasePage:
         return element.get_attribute("value")
 
     def get_element_text(self, by_locator):
-        element = WebDriverWait(self.driver, 15).until(
+        element = WebDriverWait(self.driver, 10).until(
             expected_conditions.visibility_of_element_located(by_locator)
         )
         return element.text
@@ -82,17 +91,51 @@ class BasePage:
     def return_from_iframe(self):
         self.driver.switch_to.default_content()
 
+    def wait_for_element_to_disappear(self, by_locator, timeout=10):
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                expected_conditions.presence_of_element_located(by_locator)
+            )
+        except TimeoutException:
+            print(
+                f"Element located by {by_locator} was still visible after {timeout} seconds"
+            )
+
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                expected_conditions.invisibility_of_element_located(by_locator)
+            )
+        except TimeoutException:
+            print(
+                f"Element located by {by_locator} was still visible after {timeout} seconds"
+            )
+
     def switch_to_new_window(self):
         main_window = self.driver.current_window_handle
+
+        try:
+            WebDriverWait(self.driver, 100).until(
+                lambda windows_or_tabs: len(self.driver.window_handles) > 1
+            )
+        except TimeoutException:
+            print("Timed out waiting for new page or tab to load")
+
         all_windows = self.driver.window_handles
         for window in all_windows:
             if window != main_window:
                 self.driver.switch_to.window(window)
                 break
 
-    def switch_to_tab(self, tab_index):
-        tabs = self.driver.window_handles
-        self.driver.switch_to.window(tabs[tab_index])
+        js = self.driver.execute_script
+        try:
+            WebDriverWait(self.driver, 100).until(
+                lambda load_status: js("return document.readyState") == "complete"
+            )
+        except TimeoutException:
+            print("Timed out waiting for page to load")
+
+    def switch_to_new_tab(self):
+        self.switch_to_new_window()
 
     def close_window(self):
         self.driver.close()

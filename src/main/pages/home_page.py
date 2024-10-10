@@ -18,6 +18,7 @@ from src.main.resources.locators import (
     JOB_SUPPORT_OPTION,
     JOB_SUPPORT_TITLE_PAGE,
     OPEN_WINDOW_BUTTON,
+    PRE_LOADER,
     BLOG_LINK,
     NEW_WINDOW_TITLE,
     NEW_TAB_BUTTON,
@@ -119,9 +120,10 @@ class HomePage(BasePage):
 
     def switch_to_home_new_window(self):
         self.switch_to_new_window()
+        self.wait_for_element_to_disappear(PRE_LOADER)
 
     def switch_to_home_new_tab(self):
-        self.switch_to_tab(1)
+        self.switch_to_home_new_window()
 
     def clicks_blog_link(self):
         self.do_click(BLOG_LINK)
@@ -129,13 +131,12 @@ class HomePage(BasePage):
     def get_new_window_title(self):
         return self.get_element_text(NEW_WINDOW_TITLE)
 
-    def close_and_return_to_home_page(self):
+    def close_window_and_return_to_home_page(self):
         self.close_window()
         self.return_to_main_window()
 
     def close_tab_and_return_to_home_page(self):
-        self.close_window()
-        self.switch_to_tab(0)
+        self.close_window_and_return_to_home_page()
 
     def click_new_tab_button(self):
         self.do_click(NEW_TAB_BUTTON)
