@@ -8,8 +8,25 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-
         steps:
+            -   name: Install dependencies for Chrome
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y libappindicator3-1 fonts-liberation xdg-utils \
+                    libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 \
+                    libnss3 libx11-xcb1
+
+            -   name: Set up ChromeDriver
+                uses: nanasess/setup-chromedriver@v2.2.2
+
+            -   name: Install Xvfb and Chrome
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y xvfb
+                    sudo apt-get install -y google-chrome-stable
+                    Xvfb :99 -ac &  # Start Xvfb
+                    export DISPLAY=:99  # Set display for headless Chrome
+
             -   name: Checkout code
                 uses: actions/checkout@v4
 
@@ -56,9 +73,10 @@ jobs:
             -   name: Run tests
                 id: run_tests
                 run: |
-                    poetry run test-ci || echo "Tests failed" > test_fail_flag
+                    export DISPLAY=:99
+                    poetry run test || echo "Tests failed" > test_fail_flag
                 env:
-                    HEADLESS: "True"
+                    HEADLESS: "False"
 
             -   name: Check test result
                 id: check_tests

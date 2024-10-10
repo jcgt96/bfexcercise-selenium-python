@@ -84,6 +84,10 @@ class BasePage:
 
     def wait_for_element_to_disappear(self, by_locator, timeout=10):
         WebDriverWait(self.driver, timeout).until(
+            expected_conditions.presence_of_element_located(by_locator)
+        )
+
+        WebDriverWait(self.driver, timeout).until(
             expected_conditions.invisibility_of_element_located(by_locator)
         )
 
@@ -96,9 +100,8 @@ class BasePage:
                 self.driver.switch_to.window(window)
                 break
 
-    def switch_to_tab(self, tab_index):
-        tabs = self.driver.window_handles
-        self.driver.switch_to.window(tabs[tab_index])
+    def switch_to_new_tab(self):
+        self.switch_to_new_window()
 
     def close_window(self):
         self.driver.close()
