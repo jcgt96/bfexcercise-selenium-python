@@ -24,7 +24,7 @@ OPEN_WINDOW_BUTTON: tuple[str, str] = (By.XPATH, "//button[@id='openwindow']")
 PRE_LOADER: tuple[str, str] = (By.XPATH, "/html/body/div[1]")
 BLOG_LINK: tuple[str, str] = (
     By.XPATH,
-    "//a[@href='https://www.qaclickacademy.com/blog']",
+    "(//a[contains(text(), 'Blog')])[1]",
 )
 NEW_WINDOW_TITLE: tuple[str, str] = (
     By.XPATH,

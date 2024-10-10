@@ -12,6 +12,7 @@ def chrome_headless_browser(context):
     # Check if HEADLESS environment variable is set to "True"
     if os.getenv("HEADLESS", "False").lower() == "true":
         options.add_argument("--headless")  # Enable headless mode
+        options.add_argument("--window-size=1920,1080")
 
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
@@ -22,6 +23,8 @@ def chrome_headless_browser(context):
 
 def before_all(context):
     use_fixture(chrome_headless_browser, context)
+    wait_time = 100 if os.getenv("HEADLESS", "False").lower() == "true" else 10
+    context.browser.implicitly_wait(wait_time)  # Set implicit wait time
 
 
 def after_all(context):
