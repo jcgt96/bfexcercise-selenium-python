@@ -119,10 +119,12 @@ class HomePage(BasePage):
         self.do_click(OPEN_WINDOW_BUTTON)
 
     def switch_to_home_new_window(self):
-        self.switch_to_new_window(PRE_LOADER)
+        self.switch_to_new_window()
+        self.wait_for_element_to_disappear(PRE_LOADER)
 
     def switch_to_home_new_tab(self):
-        self.switch_to_tab(1, PRE_LOADER)
+        self.switch_to_tab(1)
+        self.wait_for_element_to_disappear(PRE_LOADER)
 
     def clicks_blog_link(self):
         self.do_click(BLOG_LINK)
@@ -136,7 +138,7 @@ class HomePage(BasePage):
 
     def close_tab_and_return_to_home_page(self):
         self.close_window()
-        self.back_to_main_tab()
+        self.switch_to_tab(0)
 
     def click_new_tab_button(self):
         self.do_click(NEW_TAB_BUTTON)

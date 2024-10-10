@@ -87,26 +87,18 @@ class BasePage:
             expected_conditions.invisibility_of_element_located(by_locator)
         )
 
-    def switch_to_new_window(self, by_locator):
+    def switch_to_new_window(self):
         main_window = self.driver.current_window_handle
 
         all_windows = self.driver.window_handles
         for window in all_windows:
             if window != main_window:
                 self.driver.switch_to.window(window)
-                self.wait_for_element_to_disappear(by_locator)
                 break
 
-    def switch_to_tab(self, tab_index, by_locator):
+    def switch_to_tab(self, tab_index):
         tabs = self.driver.window_handles
-
         self.driver.switch_to.window(tabs[tab_index])
-        self.wait_for_element_to_disappear(by_locator)
-
-    def back_to_main_tab(self):
-        tabs = self.driver.window_handles
-
-        self.driver.switch_to.window(tabs[0])
 
     def close_window(self):
         self.driver.close()
