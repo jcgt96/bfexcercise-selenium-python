@@ -21,7 +21,7 @@ jobs:
 
             -   name: Install poetry
                 run: pipx install poetry
-                
+
             -   name: Set up Python
                 uses: actions/setup-python@v5
                 with:
@@ -52,23 +52,36 @@ jobs:
                 run: poetry run lint
                 continue-on-error: false
 
+            # Run tests and capture result
             -   name: Run tests
-                run: poetry run test-ci
+                id: run_tests
+                run: |
+                    poetry run test-ci || echo "Tests failed" > test_fail_flag
                 env:
                     HEADLESS: "True"
-                if: success()
+
+            -   name: Check test result
+                id: check_tests
+                run: |
+                    if [ -f test_fail_flag ]; then
+                      echo "Tests failed"
+                      echo "test-result=failed" >> $GITHUB_ENV
+                    else
+                      echo "Tests passed"
+                      echo "test-result=passed" >> $GITHUB_ENV
+                    fi
 
             -   name: Run reports
                 run: poetry run report
-                if: success()
+                if: always() # Always run reports even if tests fail
 
             # Upload Reports as Artifacts
             -   name: Upload Reports
-                if: success()
                 uses: actions/upload-artifact@v4
                 with:
                     name: reports
                     path: .run/reports
+                if: always() # Always upload reports
 
             # Optional: Run SonarQube analysis if you have it configured
             # - name: Run SonarQube Scanner
@@ -80,3 +93,8 @@ jobs:
             #     -Dsonar.sources=. \
             #     -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+            # Final step to fail build if tests failed
+            -   name: Fail the build if tests failed
+                if: env.test-result == 'failed'
+                run: exit 1
