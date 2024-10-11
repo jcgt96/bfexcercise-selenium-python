@@ -1,6 +1,7 @@
-import subprocess
-import shutil
 import os
+import shutil
+import subprocess
+import sys
 
 
 def post_install():
@@ -21,13 +22,17 @@ def sonar():
 
 def lint():
     print("Running linting actions...")
-    subprocess.run("poetry run pre-commit run --all-files", shell=True, check=False)
+    result = subprocess.run(
+        "poetry run pre-commit run --all-files", shell=True, check=False
+    )
+    sys.exit(result.returncode)
 
 
 def test(headless=False):
     print("Running tests...")
     environment = "HEADLESS=" + str(headless)
-    subprocess.run(environment + " poetry run behave", shell=True, check=False)
+    result = subprocess.run(environment + " poetry run behave", shell=True, check=False)
+    sys.exit(result.returncode)
 
 
 def report():
@@ -47,7 +52,7 @@ def report():
             reports_output_dir + history_name_dir, results_output_dir + history_name_dir
         )
 
-    subprocess.run(
+    result = subprocess.run(
         "npx allure generate "
         + results_output_dir
         + " --clean -o "
@@ -68,6 +73,7 @@ def report():
         + reports_output_dir[1:]
         + '/index.html"'
     )
+    sys.exit(result.returncode)
 
 
 def test_ci():

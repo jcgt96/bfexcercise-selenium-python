@@ -8,8 +8,25 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-
         steps:
+            -   name: Install dependencies for Chrome
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y libappindicator3-1 fonts-liberation xdg-utils \
+                    libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 \
+                    libnss3 libx11-xcb1
+
+            -   name: Set up ChromeDriver
+                uses: nanasess/setup-chromedriver@v2.2.2
+
+            -   name: Install Xvfb and Chrome
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y xvfb
+                    sudo apt-get install -y google-chrome-stable
+                    Xvfb :99 -ac &  # Start Xvfb
+                    export DISPLAY=:99  # Set display for headless Chrome
+
             -   name: Checkout code
                 uses: actions/checkout@v4
 
@@ -21,7 +38,7 @@ jobs:
 
             -   name: Install poetry
                 run: pipx install poetry
-                
+
             -   name: Set up Python
                 uses: actions/setup-python@v5
                 with:
@@ -52,23 +69,37 @@ jobs:
                 run: poetry run lint
                 continue-on-error: false
 
+            # Run tests and capture result
             -   name: Run tests
-                run: poetry run test-ci
+                id: run_tests
+                run: |
+                    export DISPLAY=:99
+                    poetry run test || echo "Tests failed" > test_fail_flag
                 env:
-                    HEADLESS: "True"
-                if: success()
+                    HEADLESS: "False"
+
+            -   name: Check test result
+                id: check_tests
+                run: |
+                    if [ -f test_fail_flag ]; then
+                      echo "Tests failed"
+                      echo "test-result=failed" >> $GITHUB_ENV
+                    else
+                      echo "Tests passed"
+                      echo "test-result=passed" >> $GITHUB_ENV
+                    fi
 
             -   name: Run reports
                 run: poetry run report
-                if: success()
+                if: always() # Always run reports even if tests fail
 
             # Upload Reports as Artifacts
             -   name: Upload Reports
-                if: success()
                 uses: actions/upload-artifact@v4
                 with:
                     name: reports
                     path: .run/reports
+                if: always() # Always upload reports
 
             # Optional: Run SonarQube analysis if you have it configured
             # - name: Run SonarQube Scanner
@@ -80,3 +111,8 @@ jobs:
             #     -Dsonar.sources=. \
             #     -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+            # Final step to fail build if tests failed
+            -   name: Fail the build if tests failed
+                if: env.test-result == 'failed'
+                run: exit 1

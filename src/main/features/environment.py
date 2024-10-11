@@ -13,6 +13,7 @@ def chrome_headless_browser(context):
     if os.getenv("HEADLESS", "False").lower() == "true":
         options.add_argument("--headless")  # Enable headless mode
 
+    options.add_argument("--window-size=1920,1080")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration
@@ -26,5 +27,6 @@ def before_all(context):
 
 def after_all(context):
     print("Quitting WebDriver")
-    context.browser.quit()
+    if context.browser:
+        context.browser.quit()
     print("WebDriver quit")
