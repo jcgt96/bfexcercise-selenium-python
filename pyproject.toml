@@ -14,13 +14,13 @@ behave = "^1.2.6"
 selenium = "^4.23.1"
 
 [tool.poetry.group.dev.dependencies]
+allure-behave = "^2.13.5"
 black = "^24.8.0"
 pylint = "^3.2.6"
 pylint-behave = "^1.0.3"
 pysonar-scanner = "^0.1.0.340"
 pre-commit = "^3.8.0"
 
-allure-behave = "^2.13.5"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
