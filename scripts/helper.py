@@ -38,8 +38,8 @@ def test(headless=False):
 def report():
     print("Generating report...")
     main_dir = "./.run/reports"
-    results_output_dir = main_dir + "/behave"
-    reports_output_dir = main_dir + "/allure"
+    results_output_dir = main_dir + "/behave/results"
+    reports_output_dir = main_dir + "/allure/report"
     history_name_dir = "/history"
 
     # Remove history folder
