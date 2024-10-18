@@ -38,8 +38,8 @@ def test(headless=False):
 def report():
     print("Generating report...")
     main_dir = "./.run/reports"
-    results_output_dir = main_dir + "/behave"
-    reports_output_dir = main_dir + "/allure"
+    results_output_dir = main_dir + "/behave/results"
+    reports_output_dir = main_dir + "/allure/report"
     history_name_dir = "/history"
 
     # Remove history folder
@@ -72,6 +72,15 @@ def report():
         + current_directory
         + reports_output_dir[1:]
         + '/index.html"'
+    )
+    sys.exit(result.returncode)
+
+
+def report_open():
+    result = subprocess.run(
+        "npx allure open ./.run/reports/allure/report",
+        shell=True,
+        check=False,
     )
     sys.exit(result.returncode)
 

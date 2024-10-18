@@ -1,7 +1,7 @@
 [behave]
 paths = src/main/features
 format=allure_behave.formatter:AllureFormatter
-outfiles=./.run/reports/behave
+outfiles=./.run/reports/behave/results
 
 [behave.userdata]
 AllureFormatter.link_pattern = {}
