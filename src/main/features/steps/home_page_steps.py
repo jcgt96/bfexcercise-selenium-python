@@ -6,8 +6,8 @@ from src.main.pages.home_page import HomePage
 
 @given("Verena is on the home page")
 def step_given_user_on_home_page(context):
-    context.browser.get(BASE_URL)
-    context.home_page = HomePage(context.browser)
+    context.driver.get(BASE_URL)
+    context.home_page = HomePage(context.driver)
 
 
 # First Scenario
@@ -112,7 +112,7 @@ def step_check_third_price(context, price):
     assert context.third_value == price
 
 
-# Eigth Scenario
+# Eighth Scenario
 @when('Verena can see that the "{text}" text box is visible')
 def step_can_see_visible_text(context, text):
     context.home_page.write_in_text_box(text)
