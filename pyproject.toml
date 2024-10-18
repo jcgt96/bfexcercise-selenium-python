@@ -32,3 +32,4 @@ lint = "scripts.helper:lint"
 test = "scripts.helper:test" #Alias for poetry run behave
 test-ci = "scripts.helper:test_ci"
 report = "scripts.helper:report"
+report-open = "scripts.helper:report_open"

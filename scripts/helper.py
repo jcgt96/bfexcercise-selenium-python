@@ -76,6 +76,15 @@ def report():
     sys.exit(result.returncode)
 
 
+def report_open():
+    result = subprocess.run(
+        "npx allure open ./.run/reports/allure/report",
+        shell=True,
+        check=False,
+    )
+    sys.exit(result.returncode)
+
+
 def test_ci():
     test(headless=True)  # Reuse test function with headless=True
 

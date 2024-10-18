@@ -62,15 +62,19 @@ poetry run test-ci
 
 ### Reporting
 
-After running tests, both the Playwright HTML report and the Allure report
-should be generated automatically.
+After running tests, you need to generate the reports if you wanted to with the
+following command:
+
+```bash
+poetry run report
+```
 
 #### Opening Allure Report
 
 Option 1: Open local reports:
 
 ```bash
-npm run test:report:open
+poetry run report-open
 ```
 
 Option 2: Open online reports:
