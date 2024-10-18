@@ -1,3 +1,5 @@
+import unittest
+
 from behave import given, when, then, step
 
 from src.main.config.config import BASE_URL
@@ -6,8 +8,8 @@ from src.main.pages.home_page import HomePage
 
 @given("Verena is on the home page")
 def step_given_user_on_home_page(context):
-    context.browser.get(BASE_URL)
-    context.home_page = HomePage(context.browser)
+    context.driver.get(BASE_URL)
+    context.home_page = HomePage(context.driver)
 
 
 # First Scenario
@@ -20,9 +22,10 @@ def step_selects_second_option_radio_button(context, radio_option):
 
 @then('she should see that the "radio2" option is selected')
 def step_then_second_radio_button_is_selected(context):
-    assert (
-        context.home_page.second_radio_button_is_selected()
-    ), "The 'Radio2' option is not selected"
+    unittest.TestCase().assertTrue(
+        context.home_page.second_radio_button_is_selected(),
+        "The 'Radio2' option is not selected",
+    )
 
 
 # Second Scenario
@@ -38,7 +41,7 @@ def step_selects_country_from_the_menu(context, country_name):
 def step_then_she_should_see_that_the_country_text_field_value_is(
     context, country_name
 ):
-    assert context.home_page.take_actual_value() == country_name
+    unittest.TestCase().assertEqual(context.home_page.take_actual_value(), country_name)
 
 
 # Third Scenario
@@ -51,7 +54,9 @@ def step_select_third_option_from_the_dropdown(context, dropbox_option):
 
 @then('she should see that "{dropbox_option}" is selected in the dropdown menu')
 def step_then_should_see_the_option_is_in_the_dropdown_field(context, dropbox_option):
-    assert context.home_page.take_actual_value_from_dropdown() == dropbox_option
+    unittest.TestCase().assertEqual(
+        context.home_page.take_actual_value_from_dropdown(), dropbox_option
+    )
 
 
 # Fourth Scenario
@@ -69,12 +74,18 @@ def step_selects_option3_in_the_checkbox(context):
 
 @then('she should see that the "Option1" checkbox is checked')
 def step_then_should_see_the_checkbox1_is_selected(context):
-    assert context.home_page.checkbox_option1_is_selected()
+    unittest.TestCase().assertTrue(
+        context.home_page.checkbox_option1_is_selected(),
+        "The 'Option1' checkbox is not selected",
+    )
 
 
 @then('she should see that the "Option3" checkbox also is checked')
 def step_then_should_see_the_checkbox3_is_selected(context):
-    assert context.home_page.checkbox_option3_is_selected()
+    unittest.TestCase().assertTrue(
+        context.home_page.checkbox_option3_is_selected(),
+        "The 'Option3' checkbox is not selected",
+    )
 
 
 # Fifth Scenario
@@ -85,7 +96,7 @@ def step_when_she_triggers_an_alert_dialog_with_a_name(context, name):
 
 @then('she should see an Alert Dialog with the text "{message}"')
 def step_check_message_in_alert(context, message):
-    assert context.home_page.get_tex_of_alert() == message
+    unittest.TestCase().assertEqual(context.home_page.get_text_of_alert(), message)
     context.home_page.dismiss_alert_dialog()
 
 
@@ -97,7 +108,7 @@ def step_when_she_triggers_a_confirmation_dialog_with_a_name(context, name):
 
 @then('she should see a Confirmation Dialog with the prompt "{prompt}"')
 def step_check_prompt_in_confirmation_dialog(context, prompt):
-    assert context.home_page.get_tex_of_alert() == prompt
+    unittest.TestCase().assertEqual(context.home_page.get_text_of_alert(), prompt)
     context.home_page.dismiss_alert_dialog()
 
 
@@ -109,15 +120,15 @@ def step_read_third_value_in_price_col(context):
 
 @then('she should see that the third price is "{price}"')
 def step_check_third_price(context, price):
-    assert context.third_value == price
+    unittest.TestCase().assertEqual(context.third_value, price)
 
 
-# Eigth Scenario
+# Eighth Scenario
 @when('Verena can see that the "{text}" text box is visible')
 def step_can_see_visible_text(context, text):
     context.home_page.write_in_text_box(text)
     context.home_page.show_text_box()
-    assert context.home_page.get_text_box_text() in text
+    unittest.TestCase().assertIn(context.home_page.get_text_box_text(), text)
 
 
 @when('she requests to hide the "HideShow Example" text box')
@@ -127,7 +138,9 @@ def step_hide_text_box(context):
 
 @then("she should see the text box become hidden")
 def step_verify_text_box_is_hidden(context):
-    assert not context.home_page.get_text_box_element().is_displayed()
+    unittest.TestCase().assertFalse(
+        context.home_page.get_text_box_element().is_displayed()
+    )
 
 
 # Ninth Scenario
@@ -138,7 +151,10 @@ def step_show_text_box(context):
 
 @then("she should see the text box become visible again")
 def step_verify_text_box_is_visible(context):
-    assert context.home_page.get_text_box_element().is_displayed()
+    unittest.TestCase().assertTrue(
+        context.home_page.get_text_box_element().is_displayed(),
+        "The text box is not displayed",
+    )
 
 
 # Advanced Exercises
@@ -152,7 +168,10 @@ def step_hover_the_hover_button(context):
 
 @then("she should see the contextual menu")
 def step_contextual_menu_is_displayed(context):
-    assert context.home_page.contextual_menu_is_displayed()
+    unittest.TestCase().assertTrue(
+        context.home_page.contextual_menu_is_displayed(),
+        "The contextual menu is not displayed",
+    )
 
 
 # Second Exercise
@@ -165,7 +184,7 @@ def step_navigates_iframe_job_support_page(context):
 @then('she should see a page titled "{title_name}" within the iframe')
 def step_title_value_is_expected(context, title_name):
     current_page_title = context.home_page.get_frame_page_title()
-    assert current_page_title == title_name
+    unittest.TestCase().assertEqual(current_page_title, title_name)
     context.home_page.return_home_page_from_frame()
 
 
@@ -183,7 +202,7 @@ def step_clicks_blog_link_new_window(context):
 
 @then('she should see a page titled "{title}"')
 def step_title_window_is_expected(context, title):
-    assert context.home_page.get_new_window_title() == title
+    unittest.TestCase().assertEqual(context.home_page.get_new_window_title(), title)
 
 
 @step("she should return to the main page after closing the new window")

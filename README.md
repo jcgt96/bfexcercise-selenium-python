@@ -60,26 +60,38 @@ For running tests in **headless mode**, use:
 poetry run test-ci
 ```
 
-### Generating Reports
+### Reporting
 
-After executing tests, generate the reports with:
+After running tests, you need to generate the reports if you wanted to with the
+following command:
 
 ```bash
 poetry run report
 ```
 
-To open the generated Allure report you need Google Chrome, run:
+#### Opening Allure Report
+
+Option 1: Open local reports:
 
 ```bash
-open -a "Google Chrome" --args --allow-file-access-from-files "$(pwd)/.run/reports/allure/index.html"
+poetry run report-open
 ```
 
-Alternatively, you can download the reports directly from GitHub Actions:
+Option 2: Open online reports:
 
-1. Go
-   to `github.com > [Your Repo] > Actions > [Latest Action] > Artifacts > reports.zip`.
-2. Extract the `reports.zip` file and open `index.html` with Chrome by using the
-   command provided above.
+https://jcgt96.github.io/bfexcercise-selenium-python
+
+Option 3: Download GitHub Actions artifact:
+
+1. Navigate to your GitHub repository.
+2. Go to `Actions > [Latest Action] > Artifacts >  github-pages`.
+3. Extract the `github-pages.zip` file, then open `index.html` using Chrome:
+
+    ```bash
+    open -a "Google Chrome" --args --allow-file-access-from-files "$(pwd)/.run/reports/allure/index.html"
+    ```
+
+---
 
 ### Development
 

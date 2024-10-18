@@ -118,7 +118,8 @@ class BasePage:
         alert = self.driver.switch_to.alert
         alert.dismiss()
 
-    def get_table_rows(self, table):
+    @staticmethod
+    def get_table_rows(table):
         return table.find_elements(By.TAG_NAME, "tr")
 
     def get_cell_text(self, table_locator, row_index, col_index):

@@ -70,7 +70,7 @@ class HomePage(BasePage):
         self.do_send_keys(NAME_INPUT, name)
         self.do_click(CONFIRM_BUTTON)
 
-    def get_tex_of_alert(self):
+    def get_text_of_alert(self):
         alert_text = self.get_alert_text()
         return alert_text
 
